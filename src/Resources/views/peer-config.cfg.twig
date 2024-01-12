@@ -1,0 +1,13 @@
+[Interface]
+PrivateKey = {{ peer.privateKey }}
+Address = {{ peer.ipAddress }}
+DNS = {{ serverDns }}
+
+[Peer]
+PublicKey = {{ peer.publicKey }}
+PresharedKey = {{ peer.preSharedKey }}
+AllowedIPs = {{ peerAllowedIps|join(', ') }}
+Endpoint = {{ serverExternalIp }}:{{ serverPort }}
+{% if peer.port is not null %}
+Port = {{ peer.port }}
+{% endif %}

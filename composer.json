@@ -1,0 +1,44 @@
+{
+    "name": "dimkinthepro/wireguard-bundle",
+    "type": "symfony-bundle",
+    "description": "Wireguard bundle for Symfony",
+    "keywords": ["symfony", "bundle", "vpn", "wireguard", "wire-guard"],
+    "homepage": "https://github.com/dimkinthepro/wireguard-bundle",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.2",
+        "ext-mbstring": "*",
+        "chillerlan/php-qrcode": "^4.3",
+        "symfony/dotenv": "^6.3",
+        "symfony/framework-bundle": "^6.3",
+        "symfony/twig-bundle": "^6.3",
+        "symfony/yaml": "6.3.*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.26",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^10.3",
+        "squizlabs/php_codesniffer": "dev-master"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Dimkinthepro\\Wireguard\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Dimkinthepro\\Wireguard\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "check-code": [
+            "phpcs ./src --standard=phpcs.xml",
+            "php-cs-fixer fix ./src --diff --config=php-cs-fixer.php --dry-run",
+            "phpstan analyse -c phpstan.neon --memory-limit=500M -vvv --debug",
+            "vendor/bin/phpunit"
+        ]
+    }
+}

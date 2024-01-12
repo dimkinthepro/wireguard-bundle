@@ -1,0 +1,14 @@
+[Interface]
+Address = {{ serverInternalIp }}
+ListenPort = {{ serverPort }}
+PostUp = iptables -A FORWARD -i {{ wgInterface }} -j ACCEPT; iptables -A FORWARD -o {{ wgInterface }} -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ serverInterface }}  -j MASQUERADE
+PostDown = iptables -D FORWARD -i {{ wgInterface }} -j ACCEPT; iptables -D FORWARD -o {{ wgInterface }} -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ serverInterface }}  -j MASQUERADE
+
+{# @var peer Dimkinthepro\Wireguard\Domain\Entity\Peer #}
+{% for peer in peers %}
+[Peer]
+PublicKey = {{ peer.publicKey }}
+PresharedKey = {{ peer.preSharedKey }}
+AllowedIPs = {{ peer.ipAddress }}
+
+{% endfor %}

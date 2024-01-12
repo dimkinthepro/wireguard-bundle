@@ -1,0 +1,20 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $wgInterface: '%dimkinthepro_wireguard.config.wg_interface%'
+            $serverInterface: '%dimkinthepro_wireguard.config.server_interface%'
+            $serverExternalIp: '%dimkinthepro_wireguard.config.server_external_ip%'
+            $serverInternalIp: '%dimkinthepro_wireguard.config.server_internal_ip%'
+            $peerAllowedIps: '%dimkinthepro_wireguard.config.peer_allowed_ips%'
+            $dns: '%dimkinthepro_wireguard.config.dns%'
+            $port: '%dimkinthepro_wireguard.config.port%'
+
+    Dimkinthepro\Wireguard\:
+        resource: '../../'
+        exclude:
+            - '../../DependencyInjection/*'
+            - '../../Domain/Entity/*'
+            - '../../**/*Enum.php'
+            - '../../**/*Exception.php'
